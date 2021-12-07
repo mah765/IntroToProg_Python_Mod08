@@ -1,0 +1,3 @@
+broom,19.99
+shovel,24.99
+pliers,34.49
