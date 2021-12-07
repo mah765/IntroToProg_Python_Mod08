@@ -33,36 +33,37 @@ class Product:
     def status():
             print("The total number of products is: ", totalProd)
 
-    # Constructor method
-    def __init__(self):
+    # -- Constructor --
+    def __init__(self, name, price):
         """A product and a price"""
-        self.name = "No name"
-        self.price = "No price"
+        self.__name = name
+        self.__price = price
         print("A new product has been added.")
         Product.totalProd += 1
 
+    # -- Properties --
     @property
     def name(self):
-        return self.name
+        return str(self.__name).title()
 
     @name.setter
     def name(self, value):
         if value == "":
             print("A product must have a name.")
         else:
-            self.name = value
+            self.__name = value
             print("Product has been renamed.")
 
     @property
     def price(self):
-        return self.price
+        return self.__price
 
     @price.setter
     def price(self, value):
         if value == "":
             print("A product must have a price.")
         else:
-            self.price = value
+            self.__price = value
             print("Product has been re-priced.")
 
 # Data -------------------------------------------------------------------- #
@@ -120,11 +121,11 @@ class IO:
     # Let user add data to the list of product objects
     # let user save current data to file and exit program
 
-prod_name = input("Please enter product name: ")
-prod_price = input("Please enter product price: ")
-p1 = Product()
-# p1.name = prod_name
-# p1.price = prod_price
+in_name = input("Please enter product name: ")
+in_price = input("Please enter product price: ")
+p1 = Product(in_name, in_price)
+print(p1.name)
+print(p1.price)
 
 
 # p1 = Product(prod_name, prod_price)
