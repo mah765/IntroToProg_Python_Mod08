@@ -25,7 +25,6 @@ class Product:
         RRoot,1.1.2030,Created Class
         MHamilton,12.5.2021,Modified code to complete assignment 8
     """
-    pass
 
     # Class attribute to track total number of products.
     totalProd = 0
@@ -37,10 +36,11 @@ class Product:
     # Constructor method
     def __init__(self, name, price):
         """A product and a price"""
-        self.name = str(name)
-        self.price = float(price)
+        self.name = name
+        self.price = price
         print("A new product has been added. Name: ", self.name, ", Price: ", self.price)
         Product.totalProd += 1
+
 
 
 # Data -------------------------------------------------------------------- #
@@ -70,7 +70,17 @@ class FileProcessor:
 
 # Presentation (Input/Output)  -------------------------------------------- #
 class IO:
-    # TODO: Add docstring
+    """Presents information about the products:
+
+        properties:
+            xxx: (string) xxx
+
+        methods:
+
+        changelog: (When,Who,What)
+            RRoot,1.1.2030,Created Class
+            MHamilton,12.5.2021,Modified code to complete assignment 8
+        """
     pass
     # TODO: Add code to show menu to user
     # TODO: Add code to get user's choice
@@ -94,8 +104,7 @@ prod_price = input("Please enter product price: ")
 p1 = Product(prod_name, prod_price)
 print(Product.totalProd)
 
-print(p1.name)
-print(p1.price)
+
 
 # Main Body of Script  ---------------------------------------------------- #
 
