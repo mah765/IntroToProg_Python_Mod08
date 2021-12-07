@@ -17,15 +17,32 @@ class Product:
     """Stores data about a product:
 
     properties:
-        product_name: (string) with the products's  name
-        product_price: (float) with the products's standard price
+        product_name: (string) with the product's  name
+        product_price: (float) with the product's standard price
     methods:
+
     changelog: (When,Who,What)
         RRoot,1.1.2030,Created Class
         MHamilton,12.5.2021,Modified code to complete assignment 8
     """
     pass
-    # TODO: Add Code to the Product class
+
+    # Class attribute to track total number of products.
+    totalProd = 0
+
+    @staticmethod
+    def status():
+            print("The total number of products is: ", totalProd)
+
+    # Constructor method
+    def __init__(self, name, price):
+        """A product and a price"""
+        self.name = str(name)
+        self.price = float(price)
+        print("A new product has been added. Name: ", self.name, ", Price: ", self.price)
+        Product.totalProd += 1
+
+
 # Data -------------------------------------------------------------------- #
 
 
@@ -70,6 +87,15 @@ class IO:
     # Show user current data in the list of product objects
     # Let user add data to the list of product objects
     # let user save current data to file and exit program
+
+prod_name = input("Please enter product name: ")
+prod_price = input("Please enter product price: ")
+
+p1 = Product(prod_name, prod_price)
+print(Product.totalProd)
+
+print(p1.name)
+print(p1.price)
 
 # Main Body of Script  ---------------------------------------------------- #
 
