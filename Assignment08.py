@@ -34,14 +34,36 @@ class Product:
             print("The total number of products is: ", totalProd)
 
     # Constructor method
-    def __init__(self, name, price):
+    def __init__(self):
         """A product and a price"""
-        self.name = name
-        self.price = price
-        print("A new product has been added. Name: ", self.name, ", Price: ", self.price)
+        self.name = "No name"
+        self.price = "No price"
+        print("A new product has been added.")
         Product.totalProd += 1
 
+    @property
+    def name(self):
+        return self.name
 
+    @name.setter
+    def name(self, value):
+        if value == "":
+            print("A product must have a name.")
+        else:
+            self.name = value
+            print("Product has been renamed.")
+
+    @property
+    def price(self):
+        return self.price
+
+    @price.setter
+    def price(self, value):
+        if value == "":
+            print("A product must have a price.")
+        else:
+            self.price = value
+            print("Product has been re-priced.")
 
 # Data -------------------------------------------------------------------- #
 
@@ -100,10 +122,21 @@ class IO:
 
 prod_name = input("Please enter product name: ")
 prod_price = input("Please enter product price: ")
+p1 = Product()
+# p1.name = prod_name
+# p1.price = prod_price
 
-p1 = Product(prod_name, prod_price)
-print(Product.totalProd)
 
+# p1 = Product(prod_name, prod_price)
+# lstOfProductObjects.append(p1)
+#
+# prod_name = input("Please enter product name: ")
+# prod_price = input("Please enter product price: ")
+# p2 = Product(prod_name, prod_price)
+# print(Product.totalProd)
+# lstOfProductObjects.append(p2)
+
+print(len(lstOfProductObjects))
 
 
 # Main Body of Script  ---------------------------------------------------- #
