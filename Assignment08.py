@@ -122,7 +122,7 @@ class FileProcessor:
         # Process the data into a file
         outfile = open(file_name, "w")
         for obj in prod_list:
-            outfile.write(obj.product_name + "," + obj.product_price + "\n")
+            outfile.write(obj.product_name + "," + obj.product_price)
         outfile.close()
         # Display a message to the user
         print("Data saved to file!")
@@ -186,9 +186,9 @@ class IO:
         :param list_of_rows: (list) of objects you want to display
         :return: nothing
         """
-        print("******* The current tasks ToDo are: *******")
+        print("******* The current products are: *******")
         for obj in prod_list:
-            print(obj.name + " (" + obj.price + ")")
+            print(obj.product_name + "," + obj.product_price)
         print("*******************************************")
         print()  # Add an extra line for looks
 
@@ -217,23 +217,53 @@ class IO:
 # Load data from file into a list of product objects when script starts
 FileProcessor.read_data_from_file(strFileName, lstOfProductObjects)
 
-# Show user a menu of options
-IO.show_menu_tasks()
+# Display a menu of choices to the user
+while (True):
+    IO.show_menu_tasks()  # Shows menu
+    choice_str = IO.input_menu_choice()  # Get menu option
+
+    if choice_str.strip() == '1':  # Show current list
+        # Show current data in the list/table
+        IO.show_current_products_in_list(lstOfProductObjects)
+        continue  # to show menu
+
+    elif choice_str.strip() == '2':  # Add a new Task
+        # First get new input from user (a task and a priority)
+        new_obj = IO.input_new_product()
+        # Now add that data to the list
+        lstOfProductObjects.append(new_obj)
+        # Remove reference
+        del new_obj
+        continue  # to show the menu
+
+    elif choice_str == '3':  # Save Data to File
+        # Here we write to file using pre-defined filename
+        FileProcessor.write_data_to_file(strFileName, lstOfProductObjects)
+        continue  # to show the menu
+
+    elif choice_str == '4':  # Exit Program
+        print("Goodbye!")
+        break  # and Exit
+
+
+
 
 # Get user's menu option choice
     # Show user current data in the list of product objects
     # Let user add data to the list of product objects
     # let user save current data to file and exit program
 
-in_name = input("Please enter product name: ")
-in_price = input("Please enter product price: ")
-p1 = Product(in_name, in_price)
-print(p1.product_name)
-print(p1.product_price)
-p1.product_name = 'BLARG'
-p1.product_price = 6.99
-print(p1.product_name)
-print(p1.product_price)
+
+
+# in_name = input("Please enter product name: ")
+# in_price = input("Please enter product price: ")
+# p1 = Product(in_name, in_price)
+# print(p1.product_name)
+# print(p1.product_price)
+# p1.product_name = 'BLARG'
+# p1.product_price = 6.99
+# print(p1.product_name)
+# print(p1.product_price)
 
 
 # p1 = Product(prod_name, prod_price)
@@ -245,7 +275,7 @@ print(p1.product_price)
 # print(Product.totalProd)
 # lstOfProductObjects.append(p2)
 
-print(len(lstOfProductObjects))
+# print(len(lstOfProductObjects))
 
 
 # Main Body of Script  ---------------------------------------------------- #

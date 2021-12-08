@@ -1,0 +1,6 @@
+Broom,19.99
+Shovel,24.99
+Pliers,34.49
+Rake,35.00
+Snowblower,449.95
+Jacket,12.35
