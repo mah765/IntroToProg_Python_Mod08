@@ -218,6 +218,7 @@ class IO:
 FileProcessor.read_data_from_file(strFileName, lstOfProductObjects)
 
 # Show user a menu of options
+IO.show_menu_tasks()
 
 # Get user's menu option choice
     # Show user current data in the list of product objects
