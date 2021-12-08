@@ -100,7 +100,7 @@ class FileProcessor:
             file = open(file_name, "r")
             for line in file:
                 line = line.strip()
-                if not line:
+                if not line:  # This deals with empty lines
                     continue
                 in_name, in_price = line.split(",")
                 # create object with these values
