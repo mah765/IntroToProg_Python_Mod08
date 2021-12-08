@@ -6,7 +6,7 @@
 # RRoot,1.1.2030,Created started script
 # RRoot,1.1.2030,Added pseudo-code to start assignment 8
 # MHamilton,12.5.2021,Initial modification of code to complete assignment 8
-# MHamilton,12.7.2021,Updated code
+# MHamilton,12.7.2021,Updated code and improved commenting
 # ------------------------------------------------------------------------ #
 
 
@@ -20,7 +20,9 @@ class Product:
     properties:
         product_name: (string) with the product's  name
         product_price: (float) with the product's standard price
+
     methods:
+        output_total_number_of_products: (static) prints total number of products
 
     changelog: (When,Who,What)
         RRoot,1.1.2030,Created Class
@@ -32,8 +34,8 @@ class Product:
 
     # -- Static method to get number of products --
     @staticmethod
-    def status():
-            print("The total number of products is: ", totalProd)
+    def output_total_number_of_products():
+        print("The total number of products is: ", Product.totalProd)
 
     # -- Constructor --
     def __init__(self, product_name, product_price):
@@ -70,16 +72,13 @@ class Product:
 
 # Data -------------------------------------------------------------------- #
 
-
-
 # Processing  ------------------------------------------------------------- #
 class FileProcessor:
     """Processes data to and from a file and a list of product objects:
 
     methods:
-        save_data_to_file(file_name, prod_list):
-
         read_data_from_file(file_name): -> (a list of product objects)
+        write_data_to_file(file_name, prod_list):
 
     changelog: (When,Who,What)
         RRoot,1.1.2030,Created Class
@@ -100,9 +99,11 @@ class FileProcessor:
         try:
             file = open(file_name, "r")
             for line in file:
+                line = line.strip()
+                if not line:
+                    continue
                 in_name, in_price = line.split(",")
-                # Here we make sure to convert all text to lower case to match with later
-                # functionality.
+                # create object with these values
                 obj = Product(in_name, in_price)
                 prod_list.append(obj)
             file.close()
@@ -116,13 +117,13 @@ class FileProcessor:
         """ Write list of user-defined product names/prices to file
 
         :param file_name: (string) user-defined filename for output:
-        :param lstOfProductObjects: (list) you want filled with file data:
+        :param prod_list: (list) you want filled with file data:
         :return: nothing
         """
         # Process the data into a file
         outfile = open(file_name, "w")
         for obj in prod_list:
-            outfile.write(obj.product_name + "," + obj.product_price)
+            outfile.write(obj.product_name + "," + obj.product_price + "\n")
         outfile.close()
         # Display a message to the user
         print("Data saved to file!")
@@ -131,20 +132,20 @@ class FileProcessor:
 
 # Processing  ------------------------------------------------------------- #
 
-
-
 # Presentation (Input/Output)  -------------------------------------------- #
 class IO:
     """Presents information about the products:
 
-        properties:
-            xxx: (string) xxx
-
         methods:
+            show_menu_tasks: shows menu of options to user
+            input_menu_choice: get choice from user
+            show_current_products_in_list: display all products currently held
+            input_new_product: allow user to add new product and price
 
         changelog: (When,Who,What)
             RRoot,1.1.2030,Created Class
             MHamilton,12.5.2021,Modified code to complete assignment 8
+            MHamilton,12.7.2021,Updated code and comments
         """
 
     # -- Method to show menu to user --
@@ -172,10 +173,9 @@ class IO:
         """
         try:
             choice = str(input("Which option would you like to perform? [1 to 4] - ")).strip()
-            print()  # Add an extra line for looks
-            return choice
+            return(choice)
         except:
-            print("Please enter a numeric value between 1 and 4.")
+            raise Exception("Please enter a numeric value between 1 and 4.")
             print()  # Add an extra line for looks
 
     # -- Method to show the current data from the file to user --
@@ -183,9 +183,11 @@ class IO:
     def show_current_products_in_list(prod_list):
         """ Shows the current Tasks in the list of objects
 
-        :param list_of_rows: (list) of objects you want to display
+        :param prod_list: (list) of objects you want to display
         :return: nothing
         """
+        Product.output_total_number_of_products()
+        print()  # Add an extra line for looks
         print("******* The current products are: *******")
         for obj in prod_list:
             print(obj.product_name + "," + obj.product_price)
@@ -207,10 +209,7 @@ class IO:
         # return object
         return (obj)
 
-
 # Presentation (Input/Output)  -------------------------------------------- #
-
-
 
 # Main Body of Script  ---------------------------------------------------- #
 
@@ -232,7 +231,7 @@ while (True):
         new_obj = IO.input_new_product()
         # Now add that data to the list
         lstOfProductObjects.append(new_obj)
-        # Remove reference
+        # Remove object
         del new_obj
         continue  # to show the menu
 
@@ -244,39 +243,6 @@ while (True):
     elif choice_str == '4':  # Exit Program
         print("Goodbye!")
         break  # and Exit
-
-
-
-
-# Get user's menu option choice
-    # Show user current data in the list of product objects
-    # Let user add data to the list of product objects
-    # let user save current data to file and exit program
-
-
-
-# in_name = input("Please enter product name: ")
-# in_price = input("Please enter product price: ")
-# p1 = Product(in_name, in_price)
-# print(p1.product_name)
-# print(p1.product_price)
-# p1.product_name = 'BLARG'
-# p1.product_price = 6.99
-# print(p1.product_name)
-# print(p1.product_price)
-
-
-# p1 = Product(prod_name, prod_price)
-# lstOfProductObjects.append(p1)
-#
-# prod_name = input("Please enter product name: ")
-# prod_price = input("Please enter product price: ")
-# p2 = Product(prod_name, prod_price)
-# print(Product.totalProd)
-# lstOfProductObjects.append(p2)
-
-# print(len(lstOfProductObjects))
-
 
 # Main Body of Script  ---------------------------------------------------- #
 
